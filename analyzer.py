@@ -24,7 +24,7 @@ if __name__ == '__main__':
 
     count = 0
     for ballot in ballots:
-        if filters.votedOneAndAlessia(ballot):
+        if filters.votedHello(ballot):
             count += 1
 
     print(count)
