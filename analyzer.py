@@ -1,6 +1,5 @@
 import csv
-
-
+import filters
 
 def getBallots():
     f = open('./Results.csv', 'r')
@@ -20,14 +19,15 @@ def getBallots():
     return ballots
 
 
-def votedOne(ballot):
-    if 'President' in ballot and !ballot['President'].startsWith('Madina'):
-        return False
-
-
 if __name__ == '__main__':
     ballots = getBallots()
-    print(ballots[:2])
+
+    count = 0
+    for ballot in ballots:
+        if filters.votedOneAndAlessia(ballot):
+            count += 1
+
+    print(count)
 
 #print(total / count)
 
