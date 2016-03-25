@@ -22,12 +22,11 @@ def getBallots():
 if __name__ == '__main__':
     ballots = getBallots()
 
-    count = 0
-    for ballot in ballots:
-        if filters.votedHello(ballot):
-            count += 1
+    shawn_ballots = list(filter(filters.votedShawn, ballots))
 
-    print(count)
+    print(len(shawn_ballots))
+
+
 
 #print(total / count)
 
