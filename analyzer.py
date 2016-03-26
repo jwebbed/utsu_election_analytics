@@ -1,5 +1,13 @@
 import csv
+import pprint
+
 import filters
+import helpers
+import keys
+from ballot import Ballot
+
+
+pp = pprint.PrettyPrinter(indent=2, compact=True)
 
 def getBallots():
     f = open('./Results.csv', 'r')
@@ -14,17 +22,49 @@ def getBallots():
         for i in range(len(ballot)):
             if ballot[i] != '':
                 hold[header[i]] = ballot[i]
-        ballots.append(hold)
+        ballots.append(Ballot(hold))
 
-    return ballots
+    return set(ballots)
+
+def sfilter(f, s):
+    return set(filter(f, s))
 
 
 if __name__ == '__main__':
     ballots = getBallots()
 
-    shawn_ballots = list(filter(filters.votedShawn, ballots))
+    artsci = set(filter(filters.isArtsci, ballots))
+    profac = set(filter(filters.isProfac, ballots))
+    utm = set(filter(filters.isUTM, ballots))
+    utsg = artsci | profac
 
-    print(len(shawn_ballots))
+    print('Voter turnout Artsci: '  + str(len(artsci)))
+    print('Voter turnout Profacs: '  + str(len(profac)))
+    print('Voter turnout UTSG: '  + str(len(utsg)))
+    print('Voter turnout UTM: '  + str(len(utm)))
+
+    no_academics = sfilter(filters.noAcademics, artsci)
+    print('')
+    print('Percentage of artsci students with no academics: ' + str(round((len(no_academics) / len(artsci)) * 100, 2)) + '%')
+
+
+
+
+    #farah = 'HXMX'
+    #abdulla = 'FWV6'
+
+
+
+
+
+
+    #voted_one_m = set(filter(filters.votedOne, utm))
+
+
+    #print('Voted 1UofT at UTM: '  + str(len(voted_one_m)))
+
+
+
 
 
 
