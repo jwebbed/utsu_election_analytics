@@ -1,5 +1,6 @@
 import csv
 import pprint
+from math import sqrt
 
 import filters
 import helpers
@@ -29,6 +30,9 @@ def getBallots():
 def sfilter(f, s):
     return set(filter(f, s))
 
+def percentStr(l1, l2):
+    return str(round(len(l1) / len(l2) * 100, 2)) + '%'
+
 
 if __name__ == '__main__':
     ballots = getBallots()
@@ -38,6 +42,7 @@ if __name__ == '__main__':
     utm = set(filter(filters.isUTM, ballots))
     utsg = artsci | profac
 
+    print('-- Turnout --')
     print('Voter turnout Artsci: '  + str(len(artsci)))
     print('Voter turnout Profacs: '  + str(len(profac)))
     print('Voter turnout UTSG: '  + str(len(utsg)))
@@ -45,24 +50,110 @@ if __name__ == '__main__':
 
     no_academics = sfilter(filters.noAcademics, artsci)
     print('')
-    print('Percentage of artsci students with no academics: ' + str(round((len(no_academics) / len(artsci)) * 100, 2)) + '%')
+    print('Percentage of artsci students with no academics: ' + percentStr(no_academics, artsci))
 
 
+    print('')
+    print('-- Slates --')
 
+    voted_all_hello = sfilter(filters.votedHello, ballots)
+    voted_all_hello_except_alessia = sfilter(filters.votedHelloAndAlessia, ballots)
 
-    #farah = 'HXMX'
-    #abdulla = 'FWV6'
+    print('Voted all of Hello: ' + str(len(voted_all_hello)) + '/' + percentStr(voted_all_hello, ballots))
+    print('Voted all of Hello except for Alessia: ' + str(len(voted_all_hello_except_alessia)) + '/' + percentStr(voted_all_hello_except_alessia, ballots))
 
+    voted_all_one = sfilter(filters.votedOne, ballots)
+    voted_all_one_except_alessia = sfilter(filters.votedOneAndAlessia, ballots)
 
+    print('Voted all of One: ' + str(len(voted_all_one)) + '/' + percentStr(voted_all_one, ballots))
+    print('Voted all of One except for Alessia: ' + str(len(voted_all_one_except_alessia)) + '/' + percentStr(voted_all_one_except_alessia, ballots))
 
+    lens = []
+    # Voted for only 1
+    print('')
+    print('-- Voted for only 1 Candidate, rest abstensions --')
 
+    voted_only_jasmine = sfilter(filters.votedOnlyJasmine, ballots)
+    print('Voted only for Jasmine, rest abstensions: ' + str(len(voted_only_jasmine)) + '/' + percentStr(voted_only_jasmine, ballots))
+    lens.append(len(voted_only_jasmine))
 
+    voted_only_madina = sfilter(filters.votedOnlyMadina, ballots)
+    print('Voted only for Madina, rest abstensions: ' + str(len(voted_only_madina)) + '/' + percentStr(voted_only_madina, ballots))
+    lens.append(len(voted_only_madina))
 
-    #voted_one_m = set(filter(filters.votedOne, utm))
+    print('')
 
+    voted_only_mathias = sfilter(filters.votedOnlyMathias, ballots)
+    print('Voted only for Mathias, rest abstensions: ' + str(len(voted_only_mathias)) + '/' + percentStr(voted_only_mathias, ballots))
+    lens.append(len(voted_only_mathias))
 
-    #print('Voted 1UofT at UTM: '  + str(len(voted_one_m)))
+    voted_only_carina = sfilter(filters.votedOnlyCarina, ballots)
+    print('Voted only for Carina, rest abstensions: ' + str(len(voted_only_carina)) + '/' + percentStr(voted_only_carina, ballots))
+    lens.append(len(voted_only_carina))
 
+    print('')
+
+    voted_only_shahin = sfilter(filters.votedOnlyShahin, ballots)
+    print('Voted only for Shahin, rest abstensions: ' + str(len(voted_only_shahin)) + '/' + percentStr(voted_only_shahin, ballots))
+    lens.append(len(voted_only_shahin))
+
+    voted_only_lera = sfilter(filters.votedOnlyLera, ballots)
+    print('Voted only for Lera, rest abstensions: ' + str(len(voted_only_lera)) + '/' + percentStr(voted_only_lera, ballots))
+    lens.append(len(voted_only_lera))
+
+    voted_only_alessia = sfilter(filters.votedOnlyAlessia, ballots)
+    print('Voted only for Alessia, rest abstensions: ' + str(len(voted_only_alessia)) + '/' + percentStr(voted_only_alessia, ballots))
+    lens.append(len(voted_only_alessia))
+
+    print('')
+
+    voted_only_farah = sfilter(filters.votedOnlyFarah, ballots)
+    print('Voted only for Farah, rest abstensions: ' + str(len(voted_only_farah)) + '/' + percentStr(voted_only_farah, ballots))
+    lens.append(len(voted_only_farah))
+
+    voted_only_malkeet = sfilter(filters.votedOnlyMalkeet, ballots)
+    print('Voted only for Malkeet, rest abstensions: ' + str(len(voted_only_malkeet)) + '/' + percentStr(voted_only_malkeet, ballots))
+    lens.append(len(voted_only_malkeet))
+
+    print('')
+
+    voted_only_lucinda = sfilter(filters.votedOnlyLucinda, ballots)
+    print('Voted only for Lucinda, rest abstensions: ' + str(len(voted_only_lucinda)) + '/' + percentStr(voted_only_lucinda, ballots))
+    lens.append(len(voted_only_lucinda))
+
+    voted_only_andre = sfilter(filters.votedOnlyAndre, ballots)
+    print('Voted only for Andre, rest abstensions: ' + str(len(voted_only_andre)) + '/' + percentStr(voted_only_andre, ballots))
+    lens.append(len(voted_only_andre))
+
+    print('')
+
+    voted_only_shawn = sfilter(filters.votedOnlyShawn, ballots)
+    print('Voted only for Shawn, rest abstensions: ' + str(len(voted_only_shawn)) + '/' + percentStr(voted_only_shawn, ballots))
+    lens.append(len(voted_only_shawn))
+
+    voted_only_andy = sfilter(filters.votedOnlyAndy, ballots)
+    print('Voted only for Andy, rest abstensions: ' + str(len(voted_only_andy)) + '/' + percentStr(voted_only_andy, ballots))
+    lens.append(len(voted_only_andy))
+
+    print('')
+    
+    total = 0
+    for i in lens:
+        total += i
+
+    average = total / len(lens)
+    print('Average individual votes: ' + str(round(average, 2)))
+
+    squared_diff = 0
+    for i in lens:
+        squared_diff += (i - average) ** 2
+
+    squared_diff /= len(lens)
+    std_dev = sqrt(squared_diff)
+    print('Standard deviation: ' + str(round(std_dev, 2)))
+
+    number_of_std_dev = (len(voted_only_carina) - average) / std_dev
+    print('Carinas number of standard deviations from the mean: ' + str(round(number_of_std_dev, 2)))
 
 
 

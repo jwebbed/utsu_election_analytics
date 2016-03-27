@@ -13,8 +13,14 @@ def _pres(ballot, name):
 def votedMadina(ballot):
     return 'President' in ballot and ballot['President'].startswith('Madina')
 
+def votedOnlyMadina(ballot):
+    return votedMadina(ballot) and (_coreExecAbstensions(ballot) == 5)
+
 def votedJasmine(ballot):
     return 'President' in ballot and ballot['President'].startswith('Jasmine')
+
+def votedOnlyJasmine(ballot):
+    return votedJasmine(ballot) and (_coreExecAbstensions(ballot) == 5)
 
 def abstainedPresident(ballot):
     return _pres(ballot, 'Abstain')
@@ -26,11 +32,21 @@ def _vpcl(ballot, name):
 def votedShahinFirst(ballot):
     return _vpcl(ballot, 'Shahin')
 
+def votedOnlyShahin(ballot):
+    return votedShahinFirst(ballot) and (_coreExecAbstensions(ballot) == 5)
+
 def votedLeraFirst(ballot):
     return _vpcl(ballot, 'Lera')
 
+def votedOnlyLera(ballot):
+    return votedLeraFirst(ballot) and (_coreExecAbstensions(ballot) == 5)
+
 def votedAlessiaFirst(ballot):
     return _vpcl(ballot, 'Alessia')
+
+def votedOnlyAlessia(ballot):
+    return votedAlessiaFirst(ballot) and (_coreExecAbstensions(ballot) == 5)
+
 
 def abstainedVPCL(ballot):
     return _vpcl(ballot, 'Abstain')
@@ -43,8 +59,14 @@ def _vpeq(ballot, name):
 def votedFarah(ballot):
     return _vpeq(ballot, 'Farah')
 
+def votedOnlyFarah(ballot):
+    return votedFarah(ballot) and (_coreExecAbstensions(ballot) == 5)
+
 def votedMalkeet(ballot):
     return _vpeq(ballot, 'Malkeet')
+
+def votedOnlyMalkeet(ballot):
+    return votedMalkeet(ballot) and (_coreExecAbstensions(ballot) == 5)
 
 def abstainedVPEQ(ballot):
     return _vpeq(ballot, 'Abstain')
@@ -57,8 +79,14 @@ def _vpex(ballot, name):
 def votedLucinda(ballot):
     return _vpex(ballot, 'Lucinda')
 
+def votedOnlyLucinda(ballot):
+    return votedLucinda(ballot) and (_coreExecAbstensions(ballot) == 5)
+
 def votedAndre(ballot):
     return _vpex(ballot, 'Andre')
+
+def votedOnlyAndre(ballot):
+    return votedAndre(ballot) and (_coreExecAbstensions(ballot) == 5)
 
 def abstainedVPEX(ballot):
     return _vpex(ballot, 'Abstain')
@@ -70,11 +98,14 @@ def _vpis(ballot, name):
 def votedMathias(ballot):
     return _vpis(ballot, 'Mathias')
 
+def votedOnlyMathias(ballot):
+    return votedMathias(ballot) and (_coreExecAbstensions(ballot) == 5)
+
 def votedCarina(ballot):
     return _vpis(ballot, 'Carina')
 
 def votedOnlyCarina(ballot):
-    return votedCarina(ballot) and (_coreExecAbstensions(ballot) == 1)
+    return votedCarina(ballot) and (_coreExecAbstensions(ballot) == 5)
 
 def abstainedVPIS(ballot):
     return _vpis(ballot, 'Abstain')
@@ -104,8 +135,14 @@ def _vpua(ballot, name):
 def votedShawn(ballot):
     return _vpua(ballot, 'Shawn')
 
+def votedOnlyShawn(ballot):
+    return votedShawn(ballot) and (_coreExecAbstensions(ballot) == 5)
+
 def votedAndy(ballot):
     return _vpua(ballot, 'Andy')
+
+def votedOnlyAndy(ballot):
+    return votedAndy(ballot) and (_coreExecAbstensions(ballot) == 5)
 
 def abstainedVPUA(ballot):
     return _vpua(ballot, 'Abstain')
