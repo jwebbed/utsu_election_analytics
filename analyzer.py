@@ -71,7 +71,7 @@ if __name__ == '__main__':
     lens = []
     # Voted for only 1
     print('')
-    print('-- Voted for only 1 Candidate, rest abstensions --')
+    print('-- Voted for only 1 Core Candidate (execs ignoring profacs), rest abstensions --')
 
     voted_only_jasmine = sfilter(filters.votedOnlyJasmine, ballots)
     print('Voted only for Jasmine, rest abstensions: ' + str(len(voted_only_jasmine)) + '/' + percentStr(voted_only_jasmine, ballots))
@@ -136,7 +136,7 @@ if __name__ == '__main__':
     lens.append(len(voted_only_andy))
 
     print('')
-    
+
     total = 0
     for i in lens:
         total += i
@@ -153,16 +153,24 @@ if __name__ == '__main__':
     print('Standard deviation: ' + str(round(std_dev, 2)))
 
     number_of_std_dev = (len(voted_only_carina) - average) / std_dev
-    print('Carinas number of standard deviations from the mean: ' + str(round(number_of_std_dev, 2)))
+    print('Carinas standard deviations from the mean: ' + str(round(number_of_std_dev, 2)))
+
+    number_of_std_dev_alessia = (len(voted_only_alessia) - average) / std_dev
+    print('Alessias standard deviations from the mean: ' + str(round(number_of_std_dev_alessia, 2)))
+
+    number_of_std_dev_jasmine = (len(voted_only_jasmine) - average) / std_dev
+    print('Jasmines standard deviations from the mean: ' + str(round(number_of_std_dev_jasmine, 2)))
+
+    number_of_std_dev_mathias = abs(len(voted_only_mathias) - average) / std_dev
+    print('Mathias standard deviations from the mean: ' + str(round(number_of_std_dev_mathias, 2)))
 
 
+    uc_ballots = sfilter(filters.isUC, ballots)
+    uc_ballots_jasmine = sfilter(filters.votedJasmine, uc_ballots)
 
+    vic_ballots = sfilter(filters.isVic, ballots)
+    vic_ballots_jasmine = sfilter(filters.votedJasmine, vic_ballots)
+    vic_ballots_madina = sfilter(filters.votedMadina, vic_ballots)
 
-
-#print(total / count)
-
-#print(yes)
-#print(no)
-
-#percent = no / (yes + no)
-#print(percent)
+    print(len(vic_ballots_jasmine))
+    print(len(vic_ballots_madina))
